@@ -36,7 +36,7 @@ In usual generative modelling, we try to model the underlying distribution of th
   
 1. We introduce a latent variable z with a simple prior p(z)
 2. We sample z ~ p(z)
-3. We pass z to a generator network : $G(z)$
+3. We pass z to a generator network : $x = G(z)$
 4. Then, x is a sample from the Generator distribution, we want $pG = pdata$
 
 * To understand why this differs from an AR model, imagine a transformer decoder. It outputs a PMF over a vocabulary set. From that PMF, you get the probability of each next token given all of the past tokens. In this case, we are explicitly utilizing p(x) to gives us probabilities of the next word. This is done repeatedly to generate the entire sentence. 

@@ -7,4 +7,5 @@ This is a repository for me to try out different generative modelling architectu
 * Diffusion Models 
 * Transformer Decoders
 * Autoregressive Models
-
+* Autoencoders
+* Graph Neural Networks (GNNs)

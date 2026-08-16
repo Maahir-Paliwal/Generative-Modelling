@@ -40,3 +40,9 @@ In usual generative modelling, we try to model the underlying distribution of th
 4. Then, x is a sample from the Generator distribution, we want $pG = pdata$
 
 * To understand why this differs from an AR model, imagine a transformer decoder. It outputs a PMF over a vocabulary set. From that PMF, you get the probability of each next token given all of the past tokens. In this case, we are explicitly utilizing p(x) to gives us probabilities of the next word. This is done repeatedly to generate the entire sentence. 
+
+### A Helpful Way to Think About it
+* Often, in CNNs, Transformers, etc. we see that at the end of the network, we apply a softmax function to give us the probabilities of our select values. That is us applying the PMF to all possible values!!!
+
+* Instead, think about how we are outputting an image from $x=G(z)$. Images would be exactly the input to our PDF, that implies that we are outputting a sample to our PDF directly, instead of the PDF applied to something itself.
+

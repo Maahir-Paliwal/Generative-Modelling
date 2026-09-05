@@ -1,5 +1,16 @@
 # Defining the Model
 
+### The Minimax Game
+
+**The original expression:**
+
+$min_G max_D(E_{x \sim pdata}[log(D(x))] + E_{z \sim p(z)}[log(1 - D(G(z)))])$
+
+**The modified expression without vanishing gradients:**
+
+$min_G max_D(E_{x \sim pdata}[log(D(x))] + E_{z \sim p(z)}[-log(D(G(z)))])$
+
+
 ### Generator : 
 Input: a latent z of dimension noise_dim (assume gaussian distribution) \
 Output : A proposed image

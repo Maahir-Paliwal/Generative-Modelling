@@ -67,10 +67,10 @@ In the MLE formulation, we have $L(\theta; D) = \prod_{i=1}^N p_{\theta}(Y(\omeg
 
 However, we then assume that the best $\theta$ retrieved from maximizing the likelihood of the data is suitable as the true function $p_{true}$. This is a very bold claim. We are assuming that a function $p_{\theta}$ that is rigid with a finite number of parameters can approximate a true probability function. This in reality is never the case, we cannot perfectly model the true distribution under this formulation. 
 
-Additionally, I will add that the reason we can use observations $(y_i,x_i) to then generalize to all $(x,y)$ is precisely because we induce a bias on the proposed function $p_{\theta}$. $\theta$ is specifically a rigid parameter set that takes on values, this is simply a function that can take any input because we have made it rigid with actual values. This allows us to induce bias that lets us model all inputs. However, it comes at the cost of the true flexibility of the $p_{true}$ function. 
+Additionally, I will add that the reason we can use observations $(y_i,x_i)$ to then generalize to all $(x,y)$ is precisely because we induce a bias on the proposed function $p_{\theta}$. $\theta$ is specifically a rigid parameter set that takes on values, this is simply a function that can take any input because we have made it rigid with actual values. This allows us to induce bias that lets us model all inputs. However, it comes at the cost of the true flexibility of the $p_{true}$ function. 
 
 
-6. The MLE formulation
+**6. The MLE formulation**
 
 Our goal is to find the $\theta$ to maximize the likelihood of our data.
 
@@ -80,4 +80,41 @@ From here, we turn to logs for numerical stability:
 
 $\hat\theta_{MLE} = arg max_{\theta} \sum_{i=1}^N log(p_{\theta}(Y(\omega) = y_i |X(\omega) = x_i))$
 
-7. We assume the model family for Y | X = x
+**7. We assume the model family for Y | X = x**
+
+Keep in mind that $Y | X = x$ is best understood as the random variable $Y$ under the condition $X=x$. The underlying random variable still remains $Y: \Omega \rightarrow \mathbb{R}$. 
+
+In the case where we have outputs $y_i \in {0, 1}$, then we often assume:
+
+$Y | X = x ~ Bernoulli(\pi_{\theta}(x))$, where 
+
+$\pi_{\theta}(x) = p_{\theta}(Y = 1 | X = x)$ 
+
+Keep in mind, for every observed $x$, $p_{\theta}(x) is a number$
+
+Then, for an observed label $y_i \in {0, 1}$, 
+
+$p_{\theta}(Y = y_i | X = x_i) = \pi_{\theta}(x_i)^{y_i}(1 - \pi_{\theta}(x_i))^{1-y_i}$
+
+
+**8.Arrive at an expression for the likelihood of the data**
+
+Therefore, the likelihood for a fixed dataset $D = {(x_i, y_i)}_{i=1}^N$ is:
+
+$L(D ; \theta) = \prod_{i=1}^{N} \pi_{\theta}(x_i)^{y_i}(1 - \pi_{\theta}(x_i))^{1-y_i}$
+
+**9. Final step: Maximize the Likelihood $\iff$ Minimize the Negative Log Likelihood**
+
+Maximize $L(D ; \theta) = \prod_{i=1}^{N} \pi_{\theta}(x_i)^{y_i}(1 - \pi_{\theta}(x_i))^{1-y_i}$
+
+$\implies$ Maximize $log(L(D ; \theta)) = \sum_{i=1}^{N} log(\pi_{\theta}(x_i)^{y_i}(1 - \pi_{\theta}(x_i))^{1-y_i})$
+
+$\implies$ Minimize $- log(L(D ; \theta)) = - \sum_{i=1}^{N} log(\pi_{\theta}(x_i)^{y_i}(1 - \pi_{\theta}(x_i))^{1-y_i})$
+
+$\implies$ Minimize $- log(L(D ; \theta)) = - \sum_{i=1}^{N} (y_i)log(\pi_{\theta}(x_i)) + (1 - y_i)log(1 - \pi_{\theta}(x_i))$
+
+Dividing by N gives the usual mean binary cross entropy:
+
+$- log(L(D ; \theta)) = - \frac{1}{N} \sum_{i=1}^{N} (y_i)log(\pi_{\theta}(x_i)) + (1 - y_i)log(1 - \pi_{\theta}(x_i))$
+
+So, we find that for the case of the Bernoulli Conditional Model, BCE is exactly the Negative Log Likelihood. 

@@ -118,3 +118,20 @@ Dividing by N gives the usual mean binary cross entropy:
 $- log(L(D ; \theta)) = - \frac{1}{N} \sum_{i=1}^{N} (y_i)log(\pi_{\theta}(x_i)) + (1 - y_i)log(1 - \pi_{\theta}(x_i))$
 
 So, we find that for the case of the Bernoulli Conditional Model, BCE is exactly the Negative Log Likelihood. 
+
+
+### How does MLE differ from MAP?
+
+In Maximum A Posteriori (MAP) we assume a prior distribution on the weights themselves
+
+We can use Bayes' Rule to arrive at the following expression:
+
+$p(\theta | D) = \frac{p(D | \theta)p(\theta)}{p(D)}$
+
+But $p(D | \theta) is exactly the likelihood L(D ; \theta)$
+
+**MAP solves** $\hat\theta_{MAP} = argmax_{\theta}p(\theta | D)$
+
+Where $p(\theta | D)$ reads as "the probability of the parameters, given the data"
+
+$\implies$ We want to find the parameter set $\hat\theta_{MAP}$ such that given the data, these parameters are most likely. 
